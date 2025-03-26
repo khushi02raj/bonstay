@@ -25,11 +25,6 @@ const App = () => {
           </Link>
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link" to="/home">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
               <Link className="nav-link" to="/hotels">
                 Hotels
               </Link>

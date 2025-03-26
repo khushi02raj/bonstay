@@ -1,17 +1,17 @@
 .card{
     background-size: cover;
-
     width: 50rem;
-          margin-top: 150px;
-          margin-left: 300px;
-          padding: 50px;
-          padding-left: 50px;
-          padding-right: 50px;
+    margin-top: 100px;
+    margin-left: 200px;
+    padding: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+    font-size: small;
 }
 
 .card-text{
     font-family: "cursive";
     font-weight: 700; 
     font-size: larger; 
-    color: crimson;  
+    color: brown;  
 }

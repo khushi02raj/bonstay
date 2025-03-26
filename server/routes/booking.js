@@ -16,5 +16,25 @@ BookingRouter.post("/create",async(req,res)=>{
         console.log(err);
     }
 })
+BookingRouter.get("/all",async(req,res)=>{
+    try{
+        const booking= await Booking.find();
+        res.status(200).send(booking);
+    }
+    catch(err){
+        console.log(err);
+    }
+})
 
+BookingRouter.delete("/:id",async(req,res)=>{
+    try{
+        const id=req.params.id;
+        await Booking.findByIdAndDelete(id);
+        res.status(200).send("Booking deleted successfully");
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+)
 export default BookingRouter;
