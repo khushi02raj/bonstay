@@ -7,6 +7,7 @@ import Hotels from "./components/Hotels";
 import Bookings from "./components/Bookings";
 import './App.css'
 import Book from "./components/Book";
+import Reschedule from "./components/Reschedule";
 
 const App = () => {
   return (
@@ -20,7 +21,7 @@ const App = () => {
         }}
       >
         <nav data-testid="nav-bar" className="navbar navbar-expand-lg navbar-light bg-custom">
-          <Link className="nav-link" style={{ fontFamily: "cursive" }} to="">
+          <Link className="nav-link" style={{ fontFamily: "cursive", outline:"none" }} to="">
             BONSTAY
           </Link>
           <ul className="navbar-nav">
@@ -58,6 +59,7 @@ const App = () => {
           <Route path="/hotels" element={<Hotels />} />
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/book/:hotelId" element={<Book />} />
+          <Route path="/bookings/:bookingId" element={<Reschedule />} />
         </Routes>
       </div>
     </BrowserRouter>

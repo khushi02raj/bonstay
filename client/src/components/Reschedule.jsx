@@ -1,31 +1,53 @@
 import React, { useState } from "react";
-//import axios from "axios";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const Reschedule = () => {
-  //State to hold the form details that needs to be added .When user enters the values the state gets updated
+  const {bookingId}=useParams();
   const [state, setState] = useState({
     startDate: "",
     endDate: "",
   });
-  //state variable to capture the success Message once the rescheduling is completed successfully.
   const [Message, setMessage] = useState("");
+  const [errMsg, setErrMessage] = useState("");
+  const [dateErrors, setDateErrors] = useState({
+    startDate: "",
+    endDate: ""
+  });
 
-  const handleSubmit = (event) => {
-    // 1. This method will be invoked when user clicks on 'Book' button.
-    // 2. You should prevent page reload on submit
-    // 3.  If all the form fields values are entered then make axios call to
-    // "http://localhost:4000/bookings/:userId" and pass the appropriate state as data to the axios call
-    // 4. If the axios call is successful, assign the below string to successMessage state:
-    //   "Reschedule is successfully done"
-    // 5. If the axios call is not successful, assign the error message to "Something went wrong"
+  const handleSubmit =async (e) => {
+    e.preventDefault();
+    if(dateErrors.startDate || dateErrors.endDate){
+      setErrMessage("Please enter valid dates");
+      return;
+    }
+    
+    try{
+      const res=await axios.put(`http://localhost:4000/api/bookings/${bookingId}`,state);
+      setMessage("Reschedule is successfully done");
+      console.log("res",res);
+    }
+    catch(err){
+      setErrMessage("Something went wrong while rescheduling");
+      console.log(err);
+    }
   };
 
-  const change = (event) => {
-    /*
-       1. This method will be invoked whenever the user changes the value of any form field. This method should also validate the form fields.
-       2. 'event' input parameter will contain both name and value of the form field.
-       3. Set state using the name and value recieved from event parameter 
-       */
+  const change = (e) => {
+    if(e.target.name==="startDate" && e.target.value===""){
+      setDateErrors({...dateErrors,startDate:"Start date is required"})
+    }
+    else if(e.target.name==="endDate" && e.target.value===""){
+      setDateErrors({...dateErrors,endDate:"End date is required"})
+    }
+    else if(e.target.name==="startDate" && e.target.value<new Date().toISOString().split('T')[0]){
+      setDateErrors({...dateErrors,startDate:"Start date should be greater than or equal to current date"})
+    }
+    else if(e.target.name==="endDate" && e.target.value<new Date().toISOString().split('T')[0]){
+      setDateErrors({...dateErrors,endDate:"End date should be greater than or equal to current date"})
+    }
+    else setDateErrors({...dateErrors,[e.target.name]:""})
+    setState({...state,[e.target.name]:e.target.value})
   };
 
   return (
@@ -67,21 +89,34 @@ const Reschedule = () => {
                     type="Date"
                     className="form-control"
                     name="startDate"
+                    value={state.startDate}
+                    onChange={change}
                   />
                 </div>
+                {dateErrors.startDate && (
+                  <div className="text-danger">{dateErrors.startDate}</div>
+                )}
                 <div className="mb-2 mt-2">
                   <label className="form-label">End Date:</label>
-                  <input type="Date" className="form-control" name="endDate" />
+                  <input type="Date" className="form-control" name="endDate" 
+                  value={state.endDate}
+                  onChange={change}/>
                 </div>
+                {dateErrors.endDate && (
+                  <div className="text-danger">{dateErrors.endDate}</div>
+                )}
                 <br />
                 <button
                   type="submit"
                   className="btn mb-2 d-block text-white"
                   style={{ backgroundColor: "#88685e", width: "100%" }}
+                  onClick={handleSubmit}
                 >
                   Reschedule
                 </button>
                 {/*Using the concept of conditional rendering,display success message, error messages related to axios calls */}
+                {Message && <div data-testid="Message" className="text-success">{Message}</div>}
+                {errMsg && <div data-testid="Message" className="text-danger">{errMsg}</div>}
                 <div data-testid="Message" className="text-danger"></div>
                 <br />
               </form>

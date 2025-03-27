@@ -48,7 +48,8 @@ const Bookings = () => {
         <p className="card-text">No of Rooms :{booking.noOfRooms}</p>
         <p className="card-text">Type of Rooms :{booking.typeOfRoom}</p>
 
-        <button className="btn btn-secondary w-50" data-testid="Reschedule-button">
+        <button className="btn btn-secondary w-50" data-testid="Reschedule-button"
+        onClick={()=>navigate(`/bookings/${booking._id}`)}>
           Reschedule
         </button>
         {/* generate necessary code to call the function to handle reschedule opration of the user */}

@@ -37,4 +37,15 @@ BookingRouter.delete("/:id",async(req,res)=>{
     }
 }
 )
+BookingRouter.put("/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = req.body;
+        await Booking.findByIdAndUpdate(id, data, { new: true }); // Pass `id` directly
+        res.status(200).send("Reschedule successful");
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("An error occurred while rescheduling");
+    }
+});
 export default BookingRouter;
