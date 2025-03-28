@@ -8,7 +8,7 @@ import Bookings from "./components/Bookings";
 import './App.css'
 import Book from "./components/Book";
 import Reschedule from "./components/Reschedule";
-
+import Addreview from "./components/Addreview";
 const App = () => {
   return (
     <BrowserRouter>
@@ -57,6 +57,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/hotels" element={<Hotels />} />
+          <Route path="/hotels/:hotelId" element={<Addreview/>} />
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/book/:hotelId" element={<Book />} />
           <Route path="/bookings/:bookingId" element={<Reschedule />} />

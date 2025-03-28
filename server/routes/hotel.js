@@ -1,4 +1,4 @@
-import Hotel from "../schema/hotel.js";
+import {Hotel} from "../schema/hotel.js";
 import express from "express";
 
 const HotelRouter = express.Router();
@@ -23,6 +23,20 @@ HotelRouter.get("/all",async(req,res)=>{
     }
     catch(err){
         console.log(err);
+    }
+})
+HotelRouter.patch("/:id",async(req,res)=>{
+    try{
+        const id=req.params.id;
+        const { review } = req.body;
+
+        const updatedHotel = await Hotel.findByIdAndUpdate(id,
+            {$push: { reviews: { review } } }, { new: true });
+        res.status(200).send(updatedHotel);
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).send("Error adding review");
     }
 })
 export default HotelRouter;

@@ -1,23 +1,23 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
-//import axios from "axios";
 const Addreview = () => {
-  //State to hold the form details that needs to be added .When user enters the values the state gets updated
+  const {hotelId} = useParams();
   const [state, setState] = useState({
     Reviews: "",
   });
-  //state to hold the individual validation errors of the form fields.
   const [formErrors, setFormErrors] = useState({
     Reviews: "",
   });
-  //state variable to capture the success Message once the review is added successfully.
   const [Message, setMessage] = useState("");
-  //state variable to indicate whether user has given values to all the mandatory fields of the form.
   const [mandatory, setMandatory] = useState(false);
-  // state variable used to disable the button when the given form value is invalid.
   const [valid, setValid] = useState(false);
 
-  const change = (event) => {
+  const change = (e) => {
+    console.log(e.target.value);
+    
+    setState({ ...state, [e.target.name]: e.target.value });
     /*
        1. This method will be invoked whenever the user changes the value of any form field. This method should also validate the form fields.
        2. 'event' input parameter will contain both name and value of the form field.
@@ -25,8 +25,31 @@ const Addreview = () => {
        */
     //set the condition as It's a required field.
   };
-  const handleSubmit = (event) => {
-    // 1. This method will be invoked when user clicks on 'Add Review' button.
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    console.log("adding review");
+    try{
+      if(state.Reviews===""){
+        setMandatory(true);
+        return;
+      }
+      await axios.patch(`http://localhost:4000/api/hotels/${hotelId}`,{
+        review: state.Reviews,
+      })
+      .then((res)=>{
+        setMessage("Review is successfully added.");
+        console.log(res);
+        
+      })
+      .catch((err)=>{
+        setMessage("Something went wrong while adding review");
+        console.log(err);
+        
+      })
+    }
+    catch(err){
+      console.log(err);
+    }
     // 2. You should prevent page reload on submit
     // 3. check whether the form fields are entered. If the form field is not entered set the mandatory state variable to true.
     // 4.  If the form field values are entered then make axios call to
@@ -80,7 +103,9 @@ const Addreview = () => {
                     name="Reviews"
                     rows="4"
                     cols="20"
-                    maxlength="100"
+                    maxLength="100"
+                    value={state.Reviews}
+                    onChange={change}
                   ></textarea>
                   {/* Check whether the reviews error is set, if set display the corresponding error message using conditional rendering
                    */}
@@ -91,6 +116,7 @@ const Addreview = () => {
                   type="submit"
                   className="btn mb-2 d-block text-white"
                   style={{ backgroundColor: "#88685e" }}
+                  onClick={handleSubmit}
                 >
                   Add Review
                 </button>
