@@ -25,7 +25,7 @@ HotelRouter.get("/all",async(req,res)=>{
         console.log(err);
     }
 })
-HotelRouter.patch("/:id",async(req,res)=>{
+HotelRouter.patch("/:id/add",async(req,res)=>{
     try{
         const id=req.params.id;
         const { review } = req.body;
@@ -37,6 +37,19 @@ HotelRouter.patch("/:id",async(req,res)=>{
     catch(err){
         console.log(err);
         res.status(500).send("Error adding review");
+    }
+})
+HotelRouter.get("/:id/show",async(req,res)=>{
+    try
+    {
+        const response=await Hotel.findById(req.params.id)
+        console.log(response);
+        
+        res.status(200).send(response.reviews);
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).send("Error finding hotel");
     }
 })
 export default HotelRouter;

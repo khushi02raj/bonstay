@@ -9,6 +9,8 @@ import './App.css'
 import Book from "./components/Book";
 import Reschedule from "./components/Reschedule";
 import Addreview from "./components/Addreview";
+import Showreview from "./components/Showreview";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -57,7 +59,8 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/hotels" element={<Hotels />} />
-          <Route path="/hotels/:hotelId" element={<Addreview/>} />
+          <Route path="/hotels/:hotelId/add" element={<Addreview/>} />
+          <Route path="/hotels/:id/show" element={<Showreview/>}/>
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/book/:hotelId" element={<Book />} />
           <Route path="/bookings/:bookingId" element={<Reschedule />} />

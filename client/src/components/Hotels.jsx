@@ -67,7 +67,7 @@ const Hotels = () => {
                         <button
                           className="btn btn-success btn-lg w-100"
                           style={{ backgroundColor: "#88685e" }}
-                          onClick={()=>navigate(`/hotels/${hotel._id}`)}
+                          onClick={()=>navigate(`/hotels/${hotel._id}/add`)}
                         >
                           Add Review
                         </button>
@@ -76,6 +76,7 @@ const Hotels = () => {
                         <button
                           className="btn btn-success btn-lg w-100"
                           style={{ backgroundColor: "#88685e" }}
+                          onClick={()=>navigate(`/hotels/${hotel._id}/show`)}
                         >
                           View Review
                         </button>
