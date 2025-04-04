@@ -38,7 +38,8 @@ const Login = () => {
         setMessage("Password should be between 8 and 12 characters.");
       } else {
         setFormErrors({ email: "", password: "" });
-        const response = await axios.post("http://localhost:4000/api/users/login", state);
+        const response = await axios.post("https://bonstay.onrender.com/api/users/login", state);
+        // const response = await axios.post("http://localhost:4000/api/users/login", state);
         setMessage("User logged in successfully");
         navigate("/");
       }
