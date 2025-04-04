@@ -23,7 +23,8 @@ const Reschedule = () => {
     }
     
     try{
-      const res=await axios.put(`http://localhost:4000/api/bookings/${bookingId}`,state);
+      const res=await axios.put(`https://bonstay.onrender.com/api/bookings/${bookingId}`,state);
+      // const res=await axios.put(`http://localhost:4000/api/bookings/${bookingId}`,state);
       setMessage("Reschedule is successfully done");
       console.log("res",res);
     }
