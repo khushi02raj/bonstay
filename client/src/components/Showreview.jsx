@@ -8,7 +8,8 @@ const Showreview = () => {
   useEffect(()=>{    
     const fetchReviews=async()=>{      
     try{
-      const response=await axios.get(`http://localhost:4000/api/hotels/${id}/show`);
+      const response=await axios.get(`https://bonstay.onrender.com/api/hotels/${id}/show`);
+      // const response=await axios.get(`http://localhost:4000/api/hotels/${id}/show`);
       setReviews(response.data);
       console.log("reviews",response.data);
     }
