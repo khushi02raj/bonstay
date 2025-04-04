@@ -33,7 +33,8 @@ const Addreview = () => {
         setMandatory(true);
         return;
       }
-      await axios.patch(`http://localhost:4000/api/hotels/${hotelId}/add`,{
+      await axios.patch(`https://bonstay.onrender.com/api/hotels/${hotelId}/add`,{
+      // await axios.patch(`http://localhost:4000/api/hotels/${hotelId}/add`,{
         review: state.Reviews,
       })
       .then((res)=>{
