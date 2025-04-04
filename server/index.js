@@ -11,7 +11,9 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-app.use(cors())
+app.use(cors({
+    origin: 'https://bonstay-client.onrender.com',
+  }))
 app.use(express.json());
 app.use("/api/users",UserRouter);
 app.use("/api/hotels",HotelRouter)
