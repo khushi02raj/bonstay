@@ -106,7 +106,8 @@ const Book = () => {
     console.log(hotelId);
     
     try {
-      const response = await axios.post("http://localhost:4000/api/bookings/create", {...state,hotelId});
+      // const response = await axios.post("http://localhost:4000/api/bookings/create", {...state,hotelId});
+      const response = await axios.post("https://bonstay.onrender.com/api/bookings/create", {...state,hotelId});
       setMessage("Booking is successfully created!",response.data);
     } catch (error) {
       console.log(error);
