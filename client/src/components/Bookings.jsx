@@ -12,7 +12,8 @@ const Bookings = () => {
   useEffect(() => {
     async function getBookings() {
       try {
-        const response = await axios.get("http://localhost:4000/api/bookings/all");
+        const response = await axios.get("https://bonstay.onrender.com/api/bookings/all");
+        // const response = await axios.get("http://localhost:4000/api/bookings/all");
         console.log("bookings:", response.data);  
         setBookings(response.data);
       } catch (err) {
@@ -23,7 +24,8 @@ const Bookings = () => {
   }, []);
   //useEffect can be used to fetch the booking details when the component is mounted. Hence the data obtained is to be updated in the corresponding state.
   const handleAction = async(id) => {
-    await axios.delete(`http://localhost:4000/api/bookings/${id}`).then((response) => {
+    // await axios.delete(`http://localhost:4000/api/bookings/${id}`).then((response) => {
+    await axios.delete(`https://bonstay.onrender.com/api/bookings/${id}`).then((response) => {
       console.log("response", response);
       setDeleteSuccess(`The booking for Booking ID : ${id} is deleted`);
       setBookings(bookings.filter((booking)=>booking._id !== id));
