@@ -9,7 +9,8 @@ const Hotels = () => {
   useEffect(() => {
     const fetchHotels = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/hotels/all");
+        const res = await axios.get("https://bonstay.onrender.com/api/hotels/all");
+        // const res = await axios.get("http://localhost:4000/api/hotels/all");
         console.log("hotels", res.data);
         setHotels(res.data);
       } catch (err) {
