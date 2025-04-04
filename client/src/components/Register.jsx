@@ -86,7 +86,8 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:4000/api/users/register", state);
+      const response = await axios.post("https://bonstay.onrender.com/api/users/register", state);
+      // const response = await axios.post("http://localhost:4000/api/users/register", state);
       setSuccessMessage("User registered successfully with the id ",response);
       navigate("/login");
     } catch (error) {
